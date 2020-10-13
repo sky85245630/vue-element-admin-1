@@ -14,7 +14,8 @@ module.exports = {
 
   // extends: ['plugin:vue/recommended', 'eslint:recommended'],
   extends: [
-    "plugin:vue/base"
+    "plugin:vue/base",
+    "eslint:recommended"
   ],
 
   // add your custom rules here
