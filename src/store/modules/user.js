@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, QQ} from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
@@ -25,6 +25,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  ASD: (state, name) => {
+    state.ASD = name
   }
 }
 
@@ -36,7 +39,9 @@ const actions = {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
+        commit('ASD', "QQ")
         setToken(data.token)
+        QQ("asdQQ")
         resolve()
       }).catch(error => {
         reject(error)

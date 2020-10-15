@@ -1,4 +1,5 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+// import Layout from '@/layout'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -25,6 +26,7 @@ export function filterAsyncRoutes(routes, roles) {
     const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
+        // 根據路油表結構遞規調用
         tmp.children = filterAsyncRoutes(tmp.children, roles)
       }
       res.push(tmp)
@@ -51,10 +53,13 @@ const actions = {
     return new Promise(resolve => {
       let accessedRoutes
       if (roles.includes('admin')) {
+        //如果是admin有權訪問所有頁面
         accessedRoutes = asyncRoutes || []
       } else {
+        //其他角色通過這個方法對此路由信息，過濾出有權訪問的路由
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       }
+      //最終獲得的可訪問的路由，通過router.accessedRoutes掛載
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
