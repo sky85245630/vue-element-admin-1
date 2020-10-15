@@ -1,4 +1,6 @@
 import Vue from 'vue'
+// import axios from 'axios'
+// import VueAxios from 'vue-axios'
 
 import Cookies from 'js-cookie'
 
@@ -28,6 +30,8 @@ import * as filters from './filters' // global filters
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
+// Vue.use(VueAxios, axios)
+
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
