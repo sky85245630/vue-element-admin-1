@@ -31,16 +31,21 @@ router.beforeEach(async(to, from, next) => {
       // 进度条完成
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
+      console.log('yes?')
       // const { roles } = await store.dispatch('user/getInfo')
       // 基于角色生成可访问路由图
-      console.log('hasToken', hasToken)
-      const accessRoutes = await store.dispatch('user/getInfo')
+      
+
+      //<<<<<<<<<
+      //const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+
+      store.dispatch('user/getInfo').then(routeList=>{
+        router.addRoutes(routeList)
+      })
+
+
       // 动态添加可访问路由
-      router.addRoutes(accessRoutes)
-      console.log(accessRoutes)
-      console.log(accessRoutes)
-      console.log(accessRoutes)
-      console.log(accessRoutes)
+
       // determine whether the user has obtained his permission roles through getInfo
       // 判斷是否有角色訊息
       // 如果已经登录的状态下，访问的不是'/login'这个路由，那么就要确定登录用户是否已通过getInfo获得其权限角色
