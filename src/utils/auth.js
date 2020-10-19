@@ -10,8 +10,8 @@ export function setToken(token) {
   return Cookies.set(TokenKey, token)
 }
 
-export function QQ(token) {
-  return Cookies.set("cookieQQ", token)
+export function TOKEN(token) {
+  return Cookies.set("TOKEN", token)
 }
 
 export function removeToken() {

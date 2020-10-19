@@ -131,9 +131,9 @@ export default {
                     this.loading = true
                     this.$store.dispatch('user/login', this.loginForm)
                         .then(() => {
+                            alert('asd')
                             this.$router.push({
-                                path: this.redirect || '/',
-                                query: this.otherQuery
+                                path: '/dashboard'
                             })
                             this.loading = false
                         })

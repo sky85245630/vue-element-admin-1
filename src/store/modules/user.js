@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken} from '@/utils/auth'
+import { getToken, setToken, removeToken,TOKEN} from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
@@ -26,9 +26,9 @@ const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
-  // ASD: (state, name) => {
-  //   state.ASD = name
-  // }
+  TOKEN: (state, name) => {
+    state.ASD = name
+  }
 }
 
 const actions = {
@@ -36,14 +36,20 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     console.log({ username: username.trim(), password: password,saveLogin:true })
+    let form = new FormData();
+    form.append("username",username)
+    form.append("password",password)
 
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password,saveLogin:true }).then(response => {
-        const { data } = response
+      login(form).then(response => {
+        // const { data } = response
+        console.log(response)
         // commit('SET_TOKEN', data.token)
-        commit('SET_TOKEN', data.result)
+        commit('TOKEN', response.result)
+        // commit('SET_TOKEN', data.result)
         // commit('ASD', "QQ")
-        setToken(data.result)
+        // setToken(data.result)
+        TOKEN(response.result)
         // QQ("asdQQ")
         resolve()
       }).catch(error => {
