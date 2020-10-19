@@ -40,7 +40,120 @@ import Layout from '@/layout'
  */
 // constantRoutes： 代表那些不需要动态判断权限的路由，如登录页、404、等通用页面。
 export const constantRoutes = [
+  // {
+  //   path: "/defaults",
+  //   name: "系统设置",
+  //   component: Layout,
+  //   redirect: '/guide/index',
+  //   alwaysShow: true,
+  //   children: [
+  //     {
+  //         sortValue: 1,
+  //         path: "/admin/User",
+  //         name: "用户管理",
+  //         component: "mclub/admin/user/Index",
+  //         alwaysShow: false
+  //     },
+  //     {
+  //         sortValue: 2,
+  //         path: "/admin/role",
+  //         name: "角色管理",
+  //         component: "mclub/admin/role/Index",
+  //         alwaysShow: false
+  //     },
+  //     {
+  //         sortValue: 3,
+  //         path: "/admin/menu",
+  //         name: "菜单管理",
+  //         component: "mclub/admin/menu/Index",
+  //         alwaysShow: false
+  //     }
+  // ],
+  // },
+
+
+  {
+    path: '/defaults',
+    component: Layout,
+    redirect: '/defaults',
+    children: [
+      {
+        path: '/defaults',
+        component: () => import('@/views/defaults/index'),
+        name: 'Defaults',
+        meta: { title: '系统设置',icon:'el-icon-s-tools' }
+      },
+    ]
+  },
+
+
+  {
+    path: '/mclub',
+    component: Layout,
+    redirect: '/mclub/admin',
+    name: 'Management',
+    meta: {
+      title: '管理清單',
+      icon: 'list'
+    },
+    children: [
+      {
+        path: '/mclub/admin/User',
+        component: () => import('@/views/mclub/admin/user/index'),
+        name: 'UserManagement',
+        meta: { title: '用户管理' }
+      },
+      {
+        path: '/mclub/admin/role',
+        component: () => import('@/views/mclub/admin/role/index'),
+        name: 'RoleManagement',
+        meta: { title: '角色管理' }
+      },
+      {
+        path: '/mclub/admin/menu',
+        component: () => import('@/views/mclub/admin/menu/index'),
+        name: 'MenuManagement',
+        meta: { title: '菜单管理' }
+      }
+    ]
+  },
+
+
+
+
   
+  {
+    path: '/content',
+    component: Layout,
+    redirect: '/content',
+    name: 'ContentManagement',
+    meta: {
+      title: '内容管理',
+      icon: 'el-icon-folder-opened'
+    },
+    children: [
+      {
+        path: '/content/tag',
+        component: () => import('@/views/mclub/admin/user/index'),
+        name: 'UserManagement',
+        meta: { title: '用户管理' }
+      },
+    ]
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
     path: '/redirect',
     component: Layout,
@@ -175,18 +288,18 @@ export const asyncRoutes = [
   // //   ]
   // // },
 
-  // {
-  //   path: '/icon',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/icons/index'),
-  //       name: 'Icons',
-  //       meta: { title: 'Icons', icon: 'icon', noCache: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/icons/index'),
+        name: 'Icons',
+        meta: { title: 'Icons', icon: 'icon', noCache: true }
+      }
+    ]
+  },
 
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
